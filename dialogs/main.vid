@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:com.vocollect.voiceartisan.dialog="http:///com/vocollect/voiceartisan/dialog.ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation">
+  <com.vocollect.voiceartisan.dialog:Dialog xmi:id="_Ih8RsMD5Eea_rui0awTl8A" id="3" startNode="_QpQXEMD5Eea_rui0awTl8A">
+    <nodes xmi:type="com.vocollect.voiceartisan.dialog:Node" xmi:id="_QpQXEMD5Eea_rui0awTl8A" id="1" name="Node1" prompt="Hello World"/>
+    <nodes xmi:type="com.vocollect.voiceartisan.dialog:Node" xmi:id="_R1E3sMD-Eea_rui0awTl8A" id="2" name="End"/>
+    <links xmi:type="com.vocollect.voiceartisan.dialog:LinkVocabulary" xmi:id="_e_MvoMD-Eea_rui0awTl8A" id="3" originNode="_QpQXEMD5Eea_rui0awTl8A" destinationNode="_R1E3sMD-Eea_rui0awTl8A" name="Link3">
+      <vocabulary>ready</vocabulary>
+    </links>
+  </com.vocollect.voiceartisan.dialog:Dialog>
+  <notation:Diagram xmi:id="_IiAjIMD5Eea_rui0awTl8A" type="Dialog" element="_Ih8RsMD5Eea_rui0awTl8A" name="main.vid" measurementUnit="Pixel">
+    <children xmi:type="notation:Shape" xmi:id="_IiAjIcD5Eea_rui0awTl8A" type="1001" element="_QpQXEMD5Eea_rui0awTl8A">
+      <children xmi:type="notation:DecorationNode" xmi:id="_IiAjIsD5Eea_rui0awTl8A" type="4001"/>
+      <children xmi:type="notation:DecorationNode" xmi:id="_IiAjI8D5Eea_rui0awTl8A" type="4002"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_IiAjJMD5Eea_rui0awTl8A" x="100" y="100"/>
+    </children>
+    <children xmi:type="notation:Shape" xmi:id="_R1JwMMD-Eea_rui0awTl8A" type="1001" element="_R1E3sMD-Eea_rui0awTl8A" fontName="Segoe UI">
+      <children xmi:type="notation:DecorationNode" xmi:id="_R1KXQMD-Eea_rui0awTl8A" type="4001"/>
+      <children xmi:type="notation:DecorationNode" xmi:id="_R1KXQcD-Eea_rui0awTl8A" type="4002"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_R1JwMcD-Eea_rui0awTl8A" x="325" y="100"/>
+    </children>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_IiAjJcD5Eea_rui0awTl8A"/>
+    <edges xmi:type="notation:Edge" xmi:id="_e_N9wMD-Eea_rui0awTl8A" type="3002" element="_e_MvoMD-Eea_rui0awTl8A" source="_IiAjIcD5Eea_rui0awTl8A" target="_R1JwMMD-Eea_rui0awTl8A">
+      <styles xmi:type="notation:RoutingStyle" xmi:id="_e_N9wcD-Eea_rui0awTl8A" routing="Rectilinear"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_e_N9wsD-Eea_rui0awTl8A" fontName="Segoe UI"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_e_N9w8D-Eea_rui0awTl8A" points="[0, 3, -175, 0]$[125, 3, -50, 0]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_e_RBEMD-Eea_rui0awTl8A" id="(1.0,0.47)"/>
+    </edges>
+  </notation:Diagram>
+</xmi:XMI>
