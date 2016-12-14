@@ -31,7 +31,7 @@ class BackStockTask(TaskBase):
         if err == 0:
             self._quantity = 0
             for data in self._queryLut.get_data():
-                self._quantity += data['Quantity']
+                self._quantity += int(data['Quantity'])
                 
         elif err == errno.ECONNREFUSED:
             prompt_ready(itext('error.connection.refused'), True)
