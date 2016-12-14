@@ -5,6 +5,8 @@ from vocollect_lut_odr.connections import LutConnection, OdrConnection
 from vocollect_lut_odr.receivers import Lut, OdrConfirmationByte
 from vocollect_lut_odr.transports import TransientSocketTransport
 
+from error_handler import get_errno
+
 
 class RecordFormatter(object):
     ''' Formatter that allows external replacement of command name '''
@@ -86,7 +88,7 @@ class InventoryLut(object):
             error = 0
         
         except Exception as e:
-            error = e.errno
+            error = get_errno(e)
         
         return error
     

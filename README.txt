@@ -1,6 +1,6 @@
 1. Add error handling to LUTs
 1.1. [X]
-1.2. []
+1.2. [X]
 1.3. []
 1.4. []
 1.5. []

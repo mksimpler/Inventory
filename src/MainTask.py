@@ -47,9 +47,10 @@ class MainTask(TaskBase):
         elif err == errno.ECONNREFUSED:
             prompt_ready(itext('error.connection.refused'), True)
             self.next_state = REQUEST_LOCATION
-            
-        else:
-            self.next_state = WELCOME_PROMPT
+        
+        elif err == errno.ETIMEDOUT:
+            prompt_ready(itext('error.connection.timeout'), True)
+            self.next_state = REQUEST_LOCATION
         
     def location_prompt(self):
         globalwords.words['sign off'].enabled = True
