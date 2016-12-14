@@ -1,5 +1,5 @@
 from vocollect_core.task.task import TaskBase
-from vocollect_core.dialog.functions import prompt_ready, prompt_digits, prompt_only, prompt_yes_no, prompt_words
+from vocollect_core.dialog.functions import prompt_ready, prompt_digits, prompt_only, prompt_yes_no
 from vocollect_core.utilities import obj_factory
 from vocollect_core.utilities.localization import itext
 from BackStockTask import BackStockTask
