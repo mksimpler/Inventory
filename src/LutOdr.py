@@ -6,6 +6,32 @@ from vocollect_lut_odr.receivers import Lut, OdrConfirmationByte
 from vocollect_lut_odr.transports import TransientSocketTransport
 
 
+class RecordFormatter(object):
+    ''' Formatter that allows external replacement of command name '''
+    def __init__(self, command):
+        self.command_name = command
+        self._record_separator = '\r\n'
+        self._record_set_terminator = '\n'
+        
+    def format_record(self, fields):
+        ''' Format the record's fields, and terminate with a record separator '''
+        from voice import getenv
+        
+        data = [self.command_name,
+                time.strftime('%m-%d-%y %H:%M:%S'),
+                getenv('Device.Id', ''),
+                getenv('Operator.Id', '')]
+        
+        data.extend([str(field) for field in fields])
+        request = ','.join(data)
+        
+        return request + self._record_separator
+    
+    def terminate_recordset(self):
+        ''' Return the end of a record set '''
+        return self._record_set_terminator
+    
+
 class InventoryOdr(object):
     def __init__(self):
         self._transport = TransientSocketTransport(
@@ -27,6 +53,7 @@ class InventoryOdr(object):
         
 
 class InventoryLut(object):
+    
     def __init__(self, command, *fields):
         self._transport = TransientSocketTransport(
                         str(get_voice_application_property("LUTHost")),
@@ -57,36 +84,11 @@ class InventoryLut(object):
                     import voice
                     voice.audio.beep(400, 0.2)
             error = 0
-            
-        except Exception:
-            pass
+        
+        except Exception as e:
+            error = e.errno
+        
         return error
     
     def get_data(self):
         return self._connection.lut_data
-        
-
-class RecordFormatter(object):
-    ''' Formatter that allows external replacement of command name '''
-    def __init__(self, command):
-        self.command_name = command
-        self._record_separator = '\r\n'
-        self._record_set_terminator = '\n'
-        
-    def format_record(self, fields):
-        ''' Format the record's fields, and terminate with a record separator '''
-        from voice import getenv
-        
-        data = [self.command_name,
-                time.strftime('%m-%d-%y %H:%M:%S'),
-                getenv('Device.Id', ''),
-                getenv('Operator.Id', '')]
-        
-        data.extend([str(field) for field in fields])
-        request = ','.join(data)
-        
-        return request + self._record_separator
-    
-    def terminate_recordset(self):
-        ''' Return the end of a record set '''
-        return self._record_set_terminator

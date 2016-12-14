@@ -1,11 +1,13 @@
 from vocollect_core.task.task import TaskBase
-from vocollect_core.dialog.functions import prompt_ready, prompt_digits, prompt_only, prompt_yes_no
+from vocollect_core.dialog.functions import prompt_ready, prompt_digits, prompt_only, prompt_yes_no, prompt_words
 from vocollect_core.utilities import obj_factory
 from vocollect_core.utilities.localization import itext
 from BackStockTask import BackStockTask
 from voice import globalwords
 from LutOdr import InventoryLut, InventoryOdr
 from vocollect_lut_odr.receivers import StringField, NumericField
+
+import errno
 
 WELCOME_PROMPT = 'welcomePrompt'
 REQUEST_LOCATION = 'requestLocation'
@@ -35,17 +37,24 @@ class MainTask(TaskBase):
         prompt_ready(itext('main.welcome.prompt'), True)
     
     def request_location(self):
-        if self._assignmentLut.send() == 0:
+        err = self._assignmentLut.send()
+        
+        if err == 0:
             data = self._assignmentLut.get_data()
             self._location = data[0]['Location']
             self._chk_digit = data[0]['CheckDigit']
-        else:
+            
+        elif err == errno.ECONNREFUSED:
+            prompt_ready(itext('error.connection.refused'), True)
             self.next_state = REQUEST_LOCATION
+            
+        else:
+            self.next_state = WELCOME_PROMPT
         
     def location_prompt(self):
         globalwords.words['sign off'].enabled = True
         op_entry = prompt_digits(itext('main.location.prompt', self._location),
-                                 itext('main.location.prompt.help'),
+                                 itext('main.location.prompt.help', self._location),
                                  3, 3, confirm=False)
         
         if int(op_entry) != int(self._chk_digit):
